@@ -14,15 +14,27 @@ export default function App() {
   });
 
   // 1. We want to increase the counter by one on render, why does it increase by more than one?
+  /*
   useEffect(() => {
     setCounter(counter + 1);
-  }, [counter]);
+  }, [counter]);// this is causing the infite incrememnt
+  */
 
+//Solution: 
+  useEffect(() => {
+    setCounter(counter + 1);
+  }, []);
+
+
+  //Bug 2 Solution
+  useEffect(() => {
+    setCounter(counter + 2);
+  }, [counterTwo]);
   // 2. We want to log out the value of counterTwo after we increase it, why doesn't it log the new value?
   // How would you log the new value rather than the old one?
   const setCountValue = () => {
     setCounterTwo(counterTwo + 1);
-    console.log("Counter Two Value is ", counterTwo); // Bug 2: It logs the old state value
+    //console.log("Counter Two Value is ", counterTwo); // Bug 2: It logs the old state value
   };
 
   // Fix Bug 1 first!
@@ -30,9 +42,10 @@ export default function App() {
   // 3.1. Bonus: if you click "Change name" then click "Increase Count Two", the name changes magically
   const changeName = () => {
     // Bug 3: Directly trying to modify the state object
-    name.fname = "Bruce";
-    name.lname = "Wayne";
-    setName(name);
+    // name.fname = "Bruce";
+    // name.lname = "Wayne";
+
+    setName({fname: "Bruce", lname: "Wayne"});//Bug 3: Solution
   };
 
   // 4. We want to increase the counter by one every second, but it displays NaN
@@ -50,9 +63,11 @@ export default function App() {
       <button onClick={setCountValue}>Increase Count Two</button>
       <button onClick={changeName}>Change Name</button>
       {/* 5. Why does the following code cause an infinite loop ? */}
-      {/* <button onClick={setCounter(counter + 1)}>
+      /*bug 3 solution */
+      <button onClick={() => setCounter(counter + 1)}>
         Stupid Button
-      </button>{" "} */}
+      </button>{" "}
+      
       <h3>Counter One: {counter}</h3>
       <h3>Counter Two: {counterTwo}</h3>
       <h3>Name is : {name.fname + " " + name.lname}</h3>
