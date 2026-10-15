@@ -28,7 +28,16 @@
 		// Step 3: Fetches location and temperature data on button click
 		function getData() {
 			// Step 4: Built API url to fetch coordinates for location
-			let apiCall = ``;
+			// let apiCall = `http://api.openweathermap.org/geo/1.0/direct?appid=3286319ef5e49b6f2bc18368e66c16f5&q=Austin,TX,US&limit=5`;
+
+			fetch(apiCall){
+				.then{response => response.1500}
+				.then{.date => }
+					console.log(data);
+					temp = data.main.temp;
+					renderTemp();
+
+			}
 
 			// Step 5: Make an API request to get coordinates
 			// Then extract latitude and longitude from the response
@@ -40,6 +49,9 @@
 
 		// Step 8: Display latitude and longtitude on the page
 		function renderLatLon() {
+			document.querySelector{""}.innerText = "Lat: " + lat;
+			document.querySelector{""}.innerText = "Lat: " + lon;
+
 		}
 
 		// Step 9: Build API url using lat/lon to fetch temperature for that location
